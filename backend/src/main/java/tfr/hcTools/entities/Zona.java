@@ -1,55 +1,40 @@
 package tfr.hcTools.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="tb_operador")
-public class Operador implements Serializable {
+@Table(name="tb_zona")
+public class Zona implements Serializable {
 	
 
 	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String email;
-	private String nif;
 	
-	@ElementCollection
-	@CollectionTable(name="TELEFONE_OP")
-	private Set<String> telefones = new HashSet<>();
+	@OneToMany(mappedBy = "zona")
+	private List<Localidade> localidades = new ArrayList<>();
 	
-	public Operador() {}
+	public Zona() {}
 
-	public Operador(Long id, String name, String email, String nif) {
+	public Zona(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.nif = nif;
-	}
-	
-	
-
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
 	}
 
 	public Long getId() {
@@ -68,20 +53,12 @@ public class Operador implements Serializable {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public List<Localidade> getLocalidades() {
+		return localidades;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getNif() {
-		return nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
+	public void setLocalidades(List<Localidade> localidades) {
+		this.localidades = localidades;
 	}
 
 	@Override
@@ -97,9 +74,10 @@ public class Operador implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Operador other = (Operador) obj;
+		Zona other = (Zona) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 	
 	
 

@@ -1,55 +1,39 @@
 package tfr.hcTools.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="tb_operador")
-public class Operador implements Serializable {
+@Table(name = "tb_localidade")
+public class Localidade implements Serializable {
 	
-
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String email;
-	private String nif;
 	
-	@ElementCollection
-	@CollectionTable(name="TELEFONE_OP")
-	private Set<String> telefones = new HashSet<>();
+	@ManyToOne
+	@JoinColumn(name="zona_id")
+	private Zona zona;
 	
-	public Operador() {}
+	public Localidade() {}
 
-	public Operador(Long id, String name, String email, String nif) {
+	public Localidade(Long id, String name, Zona zona) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.nif = nif;
-	}
-	
-	
-
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
+		this.zona = zona;
 	}
 
 	public Long getId() {
@@ -68,20 +52,12 @@ public class Operador implements Serializable {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public Zona getZona() {
+		return zona;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getNif() {
-		return nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
+	public void setZona(Zona zona) {
+		this.zona = zona;
 	}
 
 	@Override
@@ -97,9 +73,11 @@ public class Operador implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Operador other = (Operador) obj;
+		Localidade other = (Localidade) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
 	
 	
 
