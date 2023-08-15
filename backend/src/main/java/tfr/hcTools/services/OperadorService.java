@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tfr.hcTools.entities.Operador;
 import tfr.hcTools.repositories.OperadorRepository;
+import tfr.hcTools.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class OperadorService {
@@ -16,7 +17,7 @@ public class OperadorService {
 	
 	public Operador findById(Long id) {
 		Optional<Operador> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found: ID " + id + " of class: " + Operador.class.getName()));
 	}
 
 }

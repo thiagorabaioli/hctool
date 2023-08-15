@@ -8,6 +8,7 @@ import java.util.Set;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +29,7 @@ public class Operador implements Serializable {
 	private String email;
 	private String nif;
 	
-	@ElementCollection
+	@ElementCollection( fetch = FetchType.EAGER)
 	@CollectionTable(name="TELEFONE_OP")
 	private Set<String> telefones = new HashSet<>();
 	
