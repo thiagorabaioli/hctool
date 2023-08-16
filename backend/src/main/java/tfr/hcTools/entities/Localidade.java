@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +29,8 @@ public class Localidade implements Serializable {
 	private Long id;
 	private String name;
 	
-	@OneToMany(mappedBy = "localidade")
+	@JsonIgnore
+	@OneToMany(mappedBy = "localidade", fetch = FetchType.EAGER)
 	List<Endereco> enderecos = new ArrayList<>();
 	
 	@ManyToOne

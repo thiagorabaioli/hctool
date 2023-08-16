@@ -85,7 +85,7 @@ public class HcToolsApplication implements CommandLineRunner{
 	  Endereco ender2 = new Endereco(null, "Rua morada 2", "N2", "", "1000-000", cli2, local2);
 	  local2.getEnderecos().addAll(Arrays.asList(ender2));
 	  
-	  Endereco ender3 = new Endereco(null, "Rua morada 3", "N3", "", "1000-001", cli3, null);
+	  Endereco ender3 = new Endereco(null, "Rua morada 3", "N3", "", "1000-001", cli3, local1);
 	  
 	  cli1.getEnderecos().addAll(Arrays.asList(ender1));
 	  cli2.getEnderecos().addAll(Arrays.asList(ender2));
