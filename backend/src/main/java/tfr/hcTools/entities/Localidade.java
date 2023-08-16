@@ -1,6 +1,8 @@
 package tfr.hcTools.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -23,6 +26,9 @@ public class Localidade implements Serializable {
 	private Long id;
 	private String name;
 	
+	@OneToMany(mappedBy = "localidade")
+	List<Endereco> enderecos = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name="zona_id")
 	private Zona zona;
@@ -34,6 +40,16 @@ public class Localidade implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.zona = zona;
+	}
+
+	
+	
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public Long getId() {

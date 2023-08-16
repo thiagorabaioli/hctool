@@ -79,9 +79,13 @@ public class HcToolsApplication implements CommandLineRunner{
 	  Cliente cli3 = new Cliente(null, "Cliente 3", "cliente3@mail.com", "232323233", TipoCliente.PUBLICO);
 	  cli3.getTelefone().addAll(Arrays.asList("911111113"));
 	  
-	  Endereco ender1 = new Endereco(null, "Rua morada 1", "N1", "", null, cli1);
-	  Endereco ender2 = new Endereco(null, "Rua morada 2", "N2", "", null, cli2);
-	  Endereco ender3 = new Endereco(null, "Rua morada 3", "N3", "", null, cli3);
+	  Endereco ender1 = new Endereco(null, "Rua morada 1", "N1", "", "2000-000", cli1,local1);
+	  local1.getEnderecos().addAll(Arrays.asList(ender1));
+	  
+	  Endereco ender2 = new Endereco(null, "Rua morada 2", "N2", "", "1000-000", cli2, local2);
+	  local2.getEnderecos().addAll(Arrays.asList(ender2));
+	  
+	  Endereco ender3 = new Endereco(null, "Rua morada 3", "N3", "", "1000-001", cli3, null);
 	  
 	  cli1.getEnderecos().addAll(Arrays.asList(ender1));
 	  cli2.getEnderecos().addAll(Arrays.asList(ender2));
