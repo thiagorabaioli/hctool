@@ -1,9 +1,13 @@
 package tfr.hcTools.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -12,6 +16,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -29,6 +34,10 @@ public class Operador implements Serializable {
 	private String email;
 	private String nif;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "operador")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 	@ElementCollection( fetch = FetchType.EAGER)
 	@CollectionTable(name="TELEFONE_OP")
 	private Set<String> telefones = new HashSet<>();
@@ -44,6 +53,14 @@ public class Operador implements Serializable {
 	}
 	
 	
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	public Set<String> getTelefones() {
 		return telefones;

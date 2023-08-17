@@ -1,5 +1,6 @@
 package tfr.hcTools;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,14 @@ import tfr.hcTools.entities.Cliente;
 import tfr.hcTools.entities.Endereco;
 import tfr.hcTools.entities.Localidade;
 import tfr.hcTools.entities.Operador;
+import tfr.hcTools.entities.Pedido;
 import tfr.hcTools.entities.Zona;
 import tfr.hcTools.entities.enums.TipoCliente;
 import tfr.hcTools.repositories.ClienteRepository;
 import tfr.hcTools.repositories.EnderecoRepository;
 import tfr.hcTools.repositories.LocalidadeRepository;
 import tfr.hcTools.repositories.OperadorRepository;
+import tfr.hcTools.repositories.PedidoRepository;
 import tfr.hcTools.repositories.ZonaRepository;
 
 @SpringBootApplication
@@ -36,6 +39,9 @@ public class HcToolsApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepo;
+	
+	@Autowired
+	private PedidoRepository pedidoRepo;
 
 
 	public static void main(String[] args) {
@@ -93,6 +99,14 @@ public class HcToolsApplication implements CommandLineRunner{
 	  
 	  clienteRepo.saveAll(Arrays.asList(cli1,cli2, cli3));
 	  enderecoRepo.saveAll(Arrays.asList(ender1,ender2,ender3));
+	  
+	  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	  
+	  Pedido pede1 = new Pedido(null, sdf.parse("30/09/2023 10:32"), sdf.parse("29/09/2023 10:37"), sdf.parse("01/10/2023 10:32"), ope1, cli1);
+	  
+	  Pedido pede2 = new Pedido(null, sdf.parse("30/09/2023 10:32"), sdf.parse("28/09/2023 10:00"), sdf.parse("01/10/2023 10:32"), ope2, cli2);
+	  
+	  pedidoRepo.saveAll(Arrays.asList(pede1,pede2));
 	  
 		
 	}
