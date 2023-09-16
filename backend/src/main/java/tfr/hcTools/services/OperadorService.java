@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import tfr.hcTools.entities.Operador;
 import tfr.hcTools.repositories.OperadorRepository;
+import tfr.hcTools.services.exceptions.DataIntegrityException;
 import tfr.hcTools.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,6 +35,15 @@ public class OperadorService {
 	public Operador update(Operador obj) {
 		findById(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void deleteById(Long id) {
+		findById(id);
+		try {
+		  repo.deleteById(id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível deletar porque existem outros objectos associados");
+		}
 	}
 
 }
