@@ -22,7 +22,12 @@ public class OperadorService {
 	}
 	
 	public List<Operador> findAll(){
-	return repo.findAll();
+	 return repo.findAll();
+	}
+	
+	public Operador insert (Operador obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
 
 }
