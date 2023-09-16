@@ -29,5 +29,10 @@ public class OperadorService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
+	
+	public Operador update(Operador obj) {
+		findById(obj.getId());
+		return repo.save(obj);
+	}
 
 }

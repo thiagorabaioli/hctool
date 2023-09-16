@@ -43,5 +43,11 @@ public class OperadorController {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@RequestMapping (value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Operador obj, @PathVariable Long id){
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
 	
 }
