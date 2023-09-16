@@ -1,5 +1,6 @@
 package tfr.hcTools.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class OperadorService {
 	public Operador findById(Long id) {
 		Optional<Operador> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found: ID " + id + " of class: " + Operador.class.getName()));
+	}
+	
+	public List<Operador> findAll(){
+	return repo.findAll();
 	}
 
 }
