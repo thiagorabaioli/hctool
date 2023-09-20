@@ -2,6 +2,8 @@ package tfr.hcTools.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import tfr.hcTools.entities.Operador;
+import tfr.hcTools.entities.OperadorDTO;
 import tfr.hcTools.services.OperadorService;
 
 @RestController
@@ -30,9 +33,10 @@ public class OperadorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Operador>> findAll(){
+	public ResponseEntity<List<OperadorDTO>> findAll(){
 		List<Operador> list = service.findAll();
-		return ResponseEntity.ok(list);
+		List<OperadorDTO> listDto = list.stream().map(obj -> new OperadorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok(listDto);
 	}
 	
 	
