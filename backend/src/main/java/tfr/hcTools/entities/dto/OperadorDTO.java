@@ -1,6 +1,9 @@
-package tfr.hcTools.entities;
+package tfr.hcTools.entities.dto;
+
 
 import java.io.Serializable;
+
+import tfr.hcTools.entities.Operador;
 
 public class OperadorDTO implements Serializable {
 	
