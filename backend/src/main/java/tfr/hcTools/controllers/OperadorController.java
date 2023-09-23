@@ -2,8 +2,11 @@ package tfr.hcTools.controllers;
 
 import java.net.URI;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,14 +46,16 @@ public class OperadorController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody  Operador obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody  OperadorDTO objDto){
+		Operador obj = service.fromDto(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping (value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Operador obj, @PathVariable Long id){
+	public ResponseEntity<Void> update(@Valid @RequestBody OperadorDTO objDto, @PathVariable Long id){
+		Operador obj = service.fromDto(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

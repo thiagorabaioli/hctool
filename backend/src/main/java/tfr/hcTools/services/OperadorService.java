@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import tfr.hcTools.entities.Operador;
-
+import tfr.hcTools.entities.dto.OperadorDTO;
 import tfr.hcTools.repositories.OperadorRepository;
 import tfr.hcTools.services.exceptions.DataIntegrityException;
 import tfr.hcTools.services.exceptions.ObjectNotFoundException;
@@ -54,6 +54,10 @@ public class OperadorService {
 	public Page<Operador> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page,linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Operador fromDto(OperadorDTO  objDto) {
+		return new Operador(objDto.getId(), objDto.getName(), objDto.getEmail(), objDto.getNif());
 	}
 	
 	
