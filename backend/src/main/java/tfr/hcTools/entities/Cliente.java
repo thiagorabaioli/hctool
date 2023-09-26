@@ -2,12 +2,14 @@ package tfr.hcTools.entities;
 
 import java.io.Serializable;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -39,7 +41,7 @@ public class Cliente implements Serializable{
 	private Set<String> telefone = new HashSet<>();
 	
 	
-	@OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public Cliente() {}
