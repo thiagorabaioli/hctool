@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import tfr.hcTools.entities.Cliente;
 import tfr.hcTools.entities.Operador;
 import tfr.hcTools.entities.dto.OperadorDTO;
 import tfr.hcTools.repositories.OperadorRepository;
@@ -37,9 +38,11 @@ public class OperadorService {
 		return repo.save(obj);
 	}
 	
+	
 	public Operador update(Operador obj) {
-		findById(obj.getId());
-		return repo.save(obj);
+		Operador newObj = findById(obj.getId()); //Recebe oOperador por inteiro 
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void deleteById(Long id) {
@@ -58,6 +61,12 @@ public class OperadorService {
 	
 	public Operador fromDto(OperadorDTO  objDto) {
 		return new Operador(objDto.getId(), objDto.getName(), objDto.getEmail(), objDto.getNif());
+	}
+	
+	private void updateData(Operador newObj, Operador obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+		newObj.setNif(obj.getNif());
 	}
 	
 	

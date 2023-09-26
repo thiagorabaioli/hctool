@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import tfr.hcTools.entities.Cliente;
+import tfr.hcTools.entities.Cliente;
 import tfr.hcTools.entities.dto.ClienteDTO;
+import tfr.hcTools.entities.dto.ClienteNewDTO;
 import tfr.hcTools.services.ClienteService;
 
 @RestController
@@ -43,14 +45,6 @@ public class ClienteController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody  ClienteDTO objDto){
-		Cliente obj = service.fromDto(objDto);
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
-	
 	@RequestMapping (value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Long id){
 		Cliente obj = service.fromDto(objDto);
@@ -74,6 +68,14 @@ public class ClienteController {
 		Page<Cliente> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<ClienteDTO> listDto = list.map(obj -> new ClienteDTO(obj));  
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody  ClienteNewDTO objDto){
+		Cliente obj = service.fromDto(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 

@@ -21,15 +21,6 @@ public class OperadorDTO implements Serializable {
 	private String nif;
 	public OperadorDTO() {}
 	
-	
-	
-	public OperadorDTO(Long id, String name, String email, String nif) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.nif = nif;
-	}
 
 
 

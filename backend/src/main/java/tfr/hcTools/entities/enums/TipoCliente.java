@@ -30,13 +30,13 @@ public enum TipoCliente {
 		this.descricao = descricao;
 	}
 	
-	public static TipoCliente toEnum(Integer cod) {
-		if (cod == null) {
-			cod = null;
+	public static TipoCliente toEnum(Integer tipo) {
+		if (tipo == null) {
+			tipo = null;
 		}
 		
 		for(TipoCliente x : TipoCliente.values()) {
-			if(cod.equals(x.getCod())) {
+			if(tipo.equals(x.getCod())) {
 				return x;
 			}
 		}
