@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import tfr.hcTools.entities.Cliente;
+import tfr.hcTools.services.validations.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 	
 	
